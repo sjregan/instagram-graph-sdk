@@ -29,13 +29,13 @@
     },
     "autoload": {
         "psr-4": {
-            "SJRegan\\Instagram\\": "src/Facebook/"
+            "Facebook\\": "src/Facebook/"
         },
         "files": ["src/Facebook/polyfills.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "SJRegan\\Instagram\\Tests\\": "tests/"
+            "Facebook\\Tests\\": "tests/"
         }
     },
     "minimum-stability": "dev",
