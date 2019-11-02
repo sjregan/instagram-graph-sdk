@@ -1,14 +1,18 @@
 {
-    "name": "facebook/graph-sdk",
-    "description": "Facebook SDK for PHP",
-    "keywords": ["facebook", "sdk"],
+    "name": "sjregan/instagram/graph-sdk",
+    "description": "Instagram SDK for PHP",
+    "keywords": ["instagram", "facebook", "sdk"],
     "type": "library",
-    "homepage": "https://github.com/facebook/php-graph-sdk",
+    "homepage": "https://github.com/sjregan/php-graph-sdk",
     "license": "Facebook Platform",
     "authors": [
         {
             "name": "Facebook",
             "homepage": "https://github.com/facebook/php-graph-sdk/contributors"
+        },
+        {
+            "name": "SJ Regan",
+            "homepage": "https://github.com/sjregan/"
         }
     ],
     "require": {
@@ -25,18 +29,20 @@
     },
     "autoload": {
         "psr-4": {
-            "Facebook\\": "src/Facebook/"
+            "SJRegan\\Instagram\\": "src/Facebook/"
         },
         "files": ["src/Facebook/polyfills.php"]
     },
     "autoload-dev": {
         "psr-4": {
-            "Facebook\\Tests\\": "tests/"
+            "SJRegan\\Instagram\\Tests\\": "tests/"
         }
     },
+    "minimum-stability": "dev",
     "extra": {
         "branch-alias": {
-            "dev-master": "5.x-dev"
+            "dev-master": "5.x-dev",
+            "dev-instagram": "instagram"
         }
     }
 }
