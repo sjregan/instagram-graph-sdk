@@ -38,22 +38,22 @@ class FacebookClient
     /**
      * @const string Production Graph API URL.
      */
-    const BASE_GRAPH_URL = 'https://graph.facebook.com';
+    const BASE_GRAPH_URL = 'https://graph.instagram.com';
 
     /**
      * @const string Graph API URL for video uploads.
      */
-    const BASE_GRAPH_VIDEO_URL = 'https://graph-video.facebook.com';
+    const BASE_GRAPH_VIDEO_URL = 'https://graph-video.instagram.com';
 
     /**
      * @const string Beta Graph API URL.
      */
-    const BASE_GRAPH_URL_BETA = 'https://graph.beta.facebook.com';
+    const BASE_GRAPH_URL_BETA = 'https://graph.beta.instagram.com';
 
     /**
      * @const string Beta Graph API URL for video uploads.
      */
-    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.facebook.com';
+    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.instagram.com';
 
     /**
      * @const int The timeout in seconds for a normal request.

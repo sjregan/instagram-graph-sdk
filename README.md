@@ -1,8 +1,12 @@
-# Facebook SDK for PHP (v5)
+# Instagram SDK for PHP
 
-[![Build Status](https://img.shields.io/travis/facebook/php-graph-sdk/5.x.svg)](https://travis-ci.org/facebook/php-graph-sdk)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/facebook/php-graph-sdk/badges/quality-score.png?b=5.x)](https://scrutinizer-ci.com/g/facebook/php-graph-sdk/?branch=5.x)
-[![Latest Stable Version](http://img.shields.io/badge/Latest%20Stable-5.7.0-blue.svg)](https://packagist.org/packages/facebook/graph-sdk)
+This is a fork of the Facebook SDK for PHP to work with Instagram API. The minimum amount of changes have been made to make it work with Instagram Basic Display API.
+
+The namespace of the classes has not been changed so cannot be used with the official SDK.
+
+**No testing has been done, I recommend you do not use this library.**
+
+# Facebook SDK for PHP (v5)
 
 This repository contains the open source PHP SDK that allows you to access the Facebook Platform from your PHP app.
 

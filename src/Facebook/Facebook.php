@@ -58,17 +58,17 @@ class Facebook
     /**
      * @const string Default Graph API version for requests.
      */
-    const DEFAULT_GRAPH_VERSION = 'v2.10';
+    const DEFAULT_GRAPH_VERSION = 'v1.0';
 
     /**
      * @const string The name of the environment variable that contains the app ID.
      */
-    const APP_ID_ENV_NAME = 'FACEBOOK_APP_ID';
+    const APP_ID_ENV_NAME = 'INSTAGRAM_APP_ID';
 
     /**
      * @const string The name of the environment variable that contains the app secret.
      */
-    const APP_SECRET_ENV_NAME = 'FACEBOOK_APP_SECRET';
+    const APP_SECRET_ENV_NAME = 'INSTAGRAM_APP_SECRET';
 
     /**
      * @var FacebookApp The FacebookApp entity.
