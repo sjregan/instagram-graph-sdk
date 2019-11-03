@@ -1,9 +1,9 @@
 {
-    "name": "sjregan/instagram/graph-sdk",
+    "name": "sjregan/instagram-graph-sdk",
     "description": "Instagram SDK for PHP",
     "keywords": ["instagram", "facebook", "sdk"],
     "type": "library",
-    "homepage": "https://github.com/sjregan/php-graph-sdk",
+    "homepage": "https://github.com/sjregan/instagram-graph-sdk",
     "license": "Facebook Platform",
     "authors": [
         {
