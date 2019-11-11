@@ -38,23 +38,43 @@ class FacebookClient
     /**
      * @const string Production Graph API URL.
      */
-    const BASE_GRAPH_URL = 'https://graph.instagram.com';
+    const BASE_GRAPH_URL = 'https://graph.facebook.com';
 
     /**
      * @const string Graph API URL for video uploads.
      */
-    const BASE_GRAPH_VIDEO_URL = 'https://graph-video.instagram.com';
+    const BASE_GRAPH_VIDEO_URL = 'https://graph-video.facebook.com';
 
     /**
      * @const string Beta Graph API URL.
      */
-    const BASE_GRAPH_URL_BETA = 'https://graph.beta.instagram.com';
+    const BASE_GRAPH_URL_BETA = 'https://graph.beta.facebook.com';
 
     /**
      * @const string Beta Graph API URL for video uploads.
      */
-    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.instagram.com';
-
+    const BASE_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.facebook.com';
+    
+    /**
+     * @const string Production Graph API URL.
+     */
+    const BASE_INSTAGRAM_GRAPH_URL = 'https://graph.instagram.com';
+    
+    /**
+     * @const string Graph API URL for video uploads.
+     */
+    const BASE_INSTAGRAM_GRAPH_VIDEO_URL = 'https://graph-video.instagram.com';
+    
+    /**
+     * @const string Beta Graph API URL.
+     */
+    const BASE_INSTAGRAM_GRAPH_URL_BETA = 'https://graph.beta.instagram.com';
+    
+    /**
+     * @const string Beta Graph API URL for video uploads.
+     */
+    const BASE_INSTAGRAM_GRAPH_VIDEO_URL_BETA = 'https://graph-video.beta.instagram.com';
+    
     /**
      * @const int The timeout in seconds for a normal request.
      */
@@ -74,7 +94,13 @@ class FacebookClient
      * @var bool Toggle to use Graph beta url.
      */
     protected $enableBetaMode = false;
-
+    
+    /**
+     * @var bool Toggle to use Instagram Graph url.
+     */
+    protected $useInstagramApi = false;
+    
+    
     /**
      * @var FacebookHttpClientInterface HTTP client handler.
      */
@@ -90,11 +116,17 @@ class FacebookClient
      *
      * @param FacebookHttpClientInterface|null $httpClientHandler
      * @param boolean                          $enableBeta
+     * @param boolean                          $useInstagramApi
      */
-    public function __construct(FacebookHttpClientInterface $httpClientHandler = null, $enableBeta = false)
+    public function __construct(
+        FacebookHttpClientInterface $httpClientHandler = null,
+        $enableBeta = false,
+        $useInstagramApi = false
+    )
     {
         $this->httpClientHandler = $httpClientHandler ?: $this->detectHttpClientHandler();
         $this->enableBetaMode = $enableBeta;
+        $this->useInstagramApi = $useInstagramApi;
     }
 
     /**
@@ -136,6 +168,16 @@ class FacebookClient
     {
         $this->enableBetaMode = $betaMode;
     }
+    
+    /**
+     * Toggle instagram API.
+     *
+     * @param boolean $useInstagramApi
+     */
+    public function enableInstagramApi($useInstagramApi = true)
+    {
+        $this->useInstagramApi = $useInstagramApi;
+    }
 
     /**
      * Returns the base Graph URL.
@@ -147,10 +189,22 @@ class FacebookClient
     public function getBaseGraphUrl($postToVideoUrl = false)
     {
         if ($postToVideoUrl) {
-            return $this->enableBetaMode ? static::BASE_GRAPH_VIDEO_URL_BETA : static::BASE_GRAPH_VIDEO_URL;
+            if ($this->useInstagramApi) {
+                return $this->enableBetaMode ?
+                    static::BASE_INSTAGRAM_GRAPH_VIDEO_URL_BETA :
+                    static::BASE_INSTAGRAM_GRAPH_VIDEO_URL;
+            } else {
+                return $this->enableBetaMode ? static::BASE_GRAPH_VIDEO_URL_BETA : static::BASE_GRAPH_VIDEO_URL;
+            }
         }
 
-        return $this->enableBetaMode ? static::BASE_GRAPH_URL_BETA : static::BASE_GRAPH_URL;
+        if ($this->useInstagramApi) {
+            return $this->enableBetaMode ?
+                static::BASE_INSTAGRAM_GRAPH_URL_BETA :
+                static::BASE_INSTAGRAM_GRAPH_URL;
+        } else {
+            return $this->enableBetaMode ? static::BASE_GRAPH_URL_BETA : static::BASE_GRAPH_URL;
+        }
     }
 
     /**

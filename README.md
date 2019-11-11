@@ -2,9 +2,13 @@
 
 This is a fork of the Facebook SDK for PHP to work with Instagram API. The minimum amount of changes have been made to make it work with Instagram Basic Display API.
 
-The namespace of the classes has not been changed so cannot be used with the official SDK.
+**No proper testing has been done or tests written, I recommend you do not use this library.**
 
-**No testing has been done, I recommend you do not use this library.**
+To use with Instagram:
+
+* Pass 'instagram_app_id', 'instagram_app_secret', and 'use_instagram_api' parameters in config array when creating Facebook objects.
+* Optionally use 'instagram_enable_beta_mode' or 'instagram_default_graph_version' config keys.
+* Optionally use 'INSTAGRAM_APP_ID' or 'INSTAGRAM_APP_SECRET' environment variables.
 
 # Facebook SDK for PHP (v5)
 

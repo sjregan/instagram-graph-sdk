@@ -53,23 +53,38 @@ class Facebook
     /**
      * @const string Version number of the Facebook PHP SDK.
      */
-    const VERSION = '5.7.0';
+    const VERSION = '5.7.1';
 
     /**
      * @const string Default Graph API version for requests.
      */
-    const DEFAULT_GRAPH_VERSION = 'v1.0';
+    const DEFAULT_GRAPH_VERSION = 'v2.10';
 
     /**
      * @const string The name of the environment variable that contains the app ID.
      */
-    const APP_ID_ENV_NAME = 'INSTAGRAM_APP_ID';
+    const APP_ID_ENV_NAME = 'FACEBOOK_APP_ID';
 
     /**
      * @const string The name of the environment variable that contains the app secret.
      */
-    const APP_SECRET_ENV_NAME = 'INSTAGRAM_APP_SECRET';
-
+    const APP_SECRET_ENV_NAME = 'FACEBOOK_APP_SECRET';
+    
+    /**
+     * @const string Default Graph API version for Instagram requests.
+     */
+    const INSTAGRAM_DEFAULT_GRAPH_VERSION = 'v1.0';
+    
+    /**
+     * @const string The name of the environment variable that contains the Instagram app ID.
+     */
+    const INSTAGRAM_APP_ID_ENV_NAME = 'INSTAGRAM_APP_ID';
+    
+    /**
+     * @const string The name of the environment variable that contains the Instagram app secret.
+     */
+    const INSTAGRAM_APP_SECRET_ENV_NAME = 'INSTAGRAM_APP_SECRET';
+    
     /**
      * @var FacebookApp The FacebookApp entity.
      */
@@ -129,23 +144,39 @@ class Facebook
             'app_secret' => getenv(static::APP_SECRET_ENV_NAME),
             'default_graph_version' => static::DEFAULT_GRAPH_VERSION,
             'enable_beta_mode' => false,
+            'instagram_app_id' => getenv(static::INSTAGRAM_APP_ID_ENV_NAME),
+            'instagram_app_secret' => getenv(static::INSTAGRAM_APP_SECRET_ENV_NAME),
+            'instagram_default_graph_version' => static::INSTAGRAM_DEFAULT_GRAPH_VERSION,
+            'instagram_enable_beta_mode' => false,
+            'use_instagram_api' => false,
             'http_client_handler' => null,
             'persistent_data_handler' => null,
             'pseudo_random_string_generator' => null,
             'url_detection_handler' => null,
         ], $config);
 
-        if (!$config['app_id']) {
-            throw new FacebookSDKException('Required "app_id" key not supplied in config and could not find fallback environment variable "' . static::APP_ID_ENV_NAME . '"');
+        if ($config['use_instagram_api']) {
+            $config['app_id'] = $config['instagram_app_id'];
+            $config['app_secret'] = $config['instagram_app_secret'];
+            $config['default_graph_version'] = $config['instagram_default_graph_version'];
+            $config['enable_beta_mode'] = $config['instagram_enable_beta_mode'];
         }
+        
+        if (!$config['app_id']) {
+            $variable = $config['use_instagram_api'] ? static::INSTAGRAM_APP_ID_ENV_NAME : static::APP_ID_ENV_NAME;
+            throw new FacebookSDKException('Required "app_id" key not supplied in config and could not find fallback environment variable "' . $variable . '"');
+        }
+        
         if (!$config['app_secret']) {
-            throw new FacebookSDKException('Required "app_secret" key not supplied in config and could not find fallback environment variable "' . static::APP_SECRET_ENV_NAME . '"');
+            $variable = $config['use_instagram_api'] ? static::INSTAGRAM_APP_SECRET_ENV_NAME : static::APP_SECRET_ENV_NAME;
+            throw new FacebookSDKException('Required "app_secret" key not supplied in config and could not find fallback environment variable "' . $variable . '"');
         }
 
         $this->app = new FacebookApp($config['app_id'], $config['app_secret']);
         $this->client = new FacebookClient(
             HttpClientsFactory::createHttpClient($config['http_client_handler']),
-            $config['enable_beta_mode']
+            $config['enable_beta_mode'],
+            $config['use_instagram_api']
         );
         $this->pseudoRandomStringGenerator = PseudoRandomStringGeneratorFactory::createPseudoRandomStringGenerator(
             $config['pseudo_random_string_generator']
