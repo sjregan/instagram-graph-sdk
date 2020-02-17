@@ -162,7 +162,7 @@ class FacebookUrlManipulator
      */
     public static function baseGraphUrlEndpoint($urlToTrim)
     {
-        $url = '/' . preg_replace('/^https:\/\/.+\.facebook\.com(\/v.+?)?\//', '', $urlToTrim);
+        $url = preg_replace('/^https:\/\/.+\.facebook\.com(\/v.+?)?\//', '', $urlToTrim);
         return '/' . preg_replace('/^https:\/\/.+\.instagram\.com(\/v.+?)?\//', '', $url);
     }
 }
